@@ -1,5 +1,6 @@
 package com.teamindecisive.calcurmath;
 
+/*** The Probability Functions ***/
 public class ProbabilityFunctions 
 {
 	public static long factorial(int a)
