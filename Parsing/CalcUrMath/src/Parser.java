@@ -1,7 +1,3 @@
-import java.io.Console;
-
-
-
 public class Parser
 {
 	public String input;

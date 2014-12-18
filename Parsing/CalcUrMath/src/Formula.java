@@ -19,13 +19,13 @@ class OperatorFormula extends Formula
 		double l = left.calculate();
 		double r = right.calculate();
 		
-		if (operator == "+")
+		if (this.operator == "+")
 			return l + r;
-		if (operator == "-")
+		if (this.operator == "-")
 			return l - r;
-		if (operator == "*")
+		if (this.operator == "*")
 			return l * r;
-		if (operator == "/")
+		if (this.operator == "/")
 			return l / r;
 		else
 		{
@@ -49,7 +49,7 @@ class FunctionFormula extends Formula
 	public double calculate()
 	{
 		double value = toCalculate.calculate();
-		if (function == "sin")
+		if (this.function == "sin")
 			return Math.sin(value);
 		else
 		{
@@ -70,14 +70,16 @@ class ConstantFormula extends Formula
 	
 	public double calculate()
 	{
-		return number;
+		return this.number;
 	}
 }
 
 class VariableFormula extends Formula
 {
 	public char variable; //Willen we hier een character als variabele naam of moet dat ook een string kunnen zijn?
-	VariableFormula(char c)
+	public double index;
+	public double power;
+	VariableFormula(char c, double index, double power)
 	{
 		this.variable = c;
 	}
@@ -85,5 +87,13 @@ class VariableFormula extends Formula
 	public double calculate()
 	{
 		return 0; //WIP
+	}
+	
+	public Formula derive()
+	{
+		double newIndex, newPower;
+		newIndex = this.index * this.power;
+		newPower = this.power - 1;
+		return new VariableFormula(this.variable, newIndex, newPower);
 	}
 }
