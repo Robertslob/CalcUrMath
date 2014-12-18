@@ -1,0 +1,55 @@
+import java.io.Console;
+
+
+
+public class Parser
+{
+	public String input;
+	private int cursor;
+	Parser(String input)
+	{
+		this.input = input;
+		this.cursor = 0;
+	}
+	
+	char getCurrent()
+	{
+		return this.input.charAt(cursor);
+	}
+	
+	Formula parseExpression()
+	{
+		Formula term, expr;
+		term = parseTerm();
+		return null;
+	}
+	
+	Formula parseTerm()
+	{
+		Formula fact, term;
+		fact = parseFactor();
+	}
+	
+	Formula parseFactor()
+	{
+		if (getCurrent() == '(')
+		{
+			cursor++;
+			Formula e = parseExpression();
+			if (getCurrent() == ')')
+			{
+				cursor++;
+				return e;
+			}
+			else
+			{
+				String error;
+				error = "Can't parse this: " + input.substring(cursor) + "/nAre the brackets balanced?";
+				System.out.println(error);
+				return null;
+			}
+		}
+		else
+			return null;
+	}
+}
