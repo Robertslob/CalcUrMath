@@ -8,29 +8,23 @@ import org.matheclipse.core.eval.EvalUtilities;
 // For more details, see https://bitbucket.org/axelclk/symja_android_library/wiki/examples/Calculus
 public class Calculus 
 {	
-	String s;
-	
-	Calculus(String operateFunction)
-	{
-		s = operateFunction;
-	}
-	
 	// The string must be written with lowerCases
-	public String lowerCase()
+	public static String lowerCase(String s)
 	{
-		Config.PARSER_USE_LOWERCASE_SYMBOLS = true;
-		
 		EvalUtilities util = new EvalUtilities(true, false);
 		return util.evaluate(s).toString();
 	}
-	
-	// The string must be written with upperCases
-	public String upperCase()
+	/**
+	// Hoe we dit implementeren is afhankelijk van Daan, kan nu nog niet heel veel mee
+	// startwaarde a t/m b
+	public static String summation(String s, int a, int b)
 	{
-		// not sure of onderstaande regel nodig is
-		Config.PARSER_USE_LOWERCASE_SYMBOLS = false;
-		
-		EvalUtilities util = new EvalUtilities(true, false);
-		return util.evaluate(s).toString();
-	}	
+		// declareer hier een waarde ding
+		for (int n = a; n<=b; n++)
+			c = n;
+			// Waarde ding += Functiewaarde(s, n);
+			// Kan hier nog niks doen zonder Daan
+		// return waarde ding
+	}
+	**/
 }
