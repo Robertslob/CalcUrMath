@@ -21,6 +21,15 @@ public class Calculus
 		EvalDouble doubleUtil = new EvalDouble(true);
 		return String.valueOf(doubleUtil.evaluate(s));		
 	}
+	// Get the value of an function s like "Sin(x)" for x=b
+	// If the boolean is true, the answer is exact, otherwise its an approximation
+	public static String getValue(String s, String b, boolean c)
+	{
+		lowerCase("x=" + b);
+		if(c)
+			return lowerCase(s);
+		else return doubleLowerCase(s);		
+	}
 	
 	// A summation from a to b with function s
 	// If the boolean is true, the answer is exact, otherwise its an approximation
@@ -30,8 +39,7 @@ public class Calculus
 		String result = "";
 		for (int n = a; n<=b; n++)
 		{
-			lowerCase("x =" + n);
-			result += lowerCase(s);
+			result += getValue(s, String.valueOf(n), c);
 			if (!(b==n))
 				result += "+";
 		}
