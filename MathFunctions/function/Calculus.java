@@ -25,10 +25,16 @@ public class Calculus
 	// If the boolean is true, the answer is exact, otherwise its an approximation
 	public static String getValue(String s, String b, boolean c)
 	{
-		lowerCase("x=" + b);
-		if(c)
-			return lowerCase(s);
-		else return doubleLowerCase(s);		
+		if(c){
+			EvalUtilities util = new EvalUtilities(false, true);
+			util.evaluate("x=" + b);
+			return String.valueOf(util.evaluate(s));
+		}
+		else{
+			EvalDouble doubleUtil = new EvalDouble(true);
+			doubleUtil.evaluate("x=" + b);
+			return String.valueOf(doubleUtil.evaluate(s));			
+		}
 	}
 	
 	// A summation from a to b with function s
