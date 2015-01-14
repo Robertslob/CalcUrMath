@@ -11,19 +11,21 @@ import android.view.View;
 public class GraphView extends View 
 {
 	private Paint paint;
-	private float[] xValues,yValues;
+	private float[] xValues;
+	private float[][] functionValues;
 	private float maxx,maxy,minx,miny,locxAxis,locyAxis;
-	private int axes = 1;
+	private int xScl, yScl;
 	
-	public GraphView(Context context, float[] xValues, float[] yValues, int axes) 
+	public GraphView(Context context, float[] xValues, float[][] functionValues, int xScl, int yScl) 
 	{
 		super(context);
 		this.xValues=xValues;
-		this.yValues=yValues;
-		this.axes=axes;
+		this.functionValues=functionValues;
+		this.xScl=xScl;
+		this.yScl=yScl;
 		paint = new Paint();
 
-		getAxes(xValues, yValues);		
+		getAxes(xValues, functionValues);		
 	}
 
 	@Override
@@ -31,8 +33,19 @@ public class GraphView extends View
 	{	
 		float canvasHeight = getHeight();
 		float canvasWidth = getWidth();
+		
 		int[] xValuesInPixels = toPixel(canvasWidth, minx, maxx, xValues); 
-		int[] yValuesInPixels = toPixel(canvasHeight, miny, maxy, yValues);
+		int[][] functionValuesInPixels = new int [6][];
+		
+		for(int i = 0; i<6; i++)
+			if(functionValues[i]!= null)
+				functionValuesInPixels[i] = toPixel(canvasHeight, miny, maxy, functionValues[i]);
+		/*int[] F1ValuesInPixels = toPixel(canvasHeight, miny, maxy, functionValues[1]);
+		int[] F2ValuesInPixels = toPixel(canvasHeight, miny, maxy, functionValues[2]);
+		int[] F3ValuesInPixels = toPixel(canvasHeight, miny, maxy, functionValues[3]);
+		int[] F4ValuesInPixels = toPixel(canvasHeight, miny, maxy, functionValues[4]);
+		int[] F5ValuesInPixels = toPixel(canvasHeight, miny, maxy, functionValues[5]);
+		int[] F6ValuesInPixels = toPixel(canvasHeight, miny, maxy, functionValues[6]);*/
 		int locxAxisInPixels = toPixelInt(canvasHeight, miny, maxy, locxAxis);
 		int locyAxisInPixels = toPixelInt(canvasWidth, minx, maxx, locyAxis);
 
@@ -41,30 +54,58 @@ public class GraphView extends View
 		for (int i = 0; i < xValues.length-1; i++) 
 		{
 			paint.setColor(Color.RED);
-			canvas.drawLine(xValuesInPixels[i],canvasHeight-yValuesInPixels[i],xValuesInPixels[i+1],canvasHeight-yValuesInPixels[i+1],paint);
+			for(int n = 0; n<6; n++)
+				if(functionValuesInPixels[n]!=null)
+					canvas.drawLine(xValuesInPixels[i], canvasHeight-functionValuesInPixels[n][i],xValuesInPixels[i+1],canvasHeight-functionValuesInPixels[n][i+1],paint);
+			/*canvas.drawLine(xValuesInPixels[i],canvasHeight-F1ValuesInPixels[i],xValuesInPixels[i+1],canvasHeight-F1ValuesInPixels[i+1],paint);
+			canvas.drawLine(xValuesInPixels[i],canvasHeight-F2ValuesInPixels[i],xValuesInPixels[i+1],canvasHeight-F2ValuesInPixels[i+1],paint);
+			canvas.drawLine(xValuesInPixels[i],canvasHeight-F3ValuesInPixels[i],xValuesInPixels[i+1],canvasHeight-F3ValuesInPixels[i+1],paint);
+			canvas.drawLine(xValuesInPixels[i],canvasHeight-F4ValuesInPixels[i],xValuesInPixels[i+1],canvasHeight-F4ValuesInPixels[i+1],paint);
+			canvas.drawLine(xValuesInPixels[i],canvasHeight-F5ValuesInPixels[i],xValuesInPixels[i+1],canvasHeight-F5ValuesInPixels[i+1],paint);
+			canvas.drawLine(xValuesInPixels[i],canvasHeight-F6ValuesInPixels[i],xValuesInPixels[i+1],canvasHeight-F6ValuesInPixels[i+1],paint);*/
 		}
 		
+		// Draw the black line for the axes
 		paint.setColor(Color.BLACK);
 		canvas.drawLine(0,canvasHeight-locxAxisInPixels,canvasWidth,canvasHeight-locxAxisInPixels,paint);
 		canvas.drawLine(locyAxisInPixels,0,locyAxisInPixels,canvasHeight,paint);
 		
-		//Automatic axes markings, modify n to control the number of axes labels
-		if (axes!=0)
+		// Paint numbers at the axes
+		paintAxes(xScl, "x", canvas);
+		paintAxes(yScl, "y", canvas);
+	}
+	
+	private void paintAxes(int scl, String s, Canvas canvas)
+	{
+		float canvasHeight = getHeight();
+		float canvasWidth = getWidth();
+		int locxAxisInPixels = toPixelInt(canvasHeight, miny, maxy, locxAxis);
+		int locyAxisInPixels = toPixelInt(canvasWidth, minx, maxx, locyAxis);
+		
+		if(scl!=0)
 		{
 			float temp = 0.0f;
-			int n=10;
 			paint.setTextAlign(Paint.Align.CENTER);
 			paint.setTextSize(20.0f);
-			for (int i=1;i<=n;i++)
+			if(s=="x")
 			{
-				temp = Math.round(10*(minx+(i-1)*(maxx-minx)/n))/10;
-				canvas.drawText(""+temp, (float)toPixelInt(canvasWidth, minx, maxx, temp),canvasHeight-locxAxisInPixels+20, paint);
-				temp = Math.round(10*(miny+(i-1)*(maxy-miny)/n))/10;
-				canvas.drawText(""+temp, locyAxisInPixels+20,canvasHeight-(float)toPixelInt(canvasHeight, miny, maxy, temp), paint);
+				for (int i=1;i<=scl;i++)
+				{
+					temp = Math.round(10*(minx+(i-1)*(maxx-minx)/scl))/10;
+					canvas.drawText(""+temp, (float)toPixelInt(canvasWidth, minx, maxx, temp),canvasHeight-locxAxisInPixels+20, paint);
+				}
+				canvas.drawText(""+maxx, (float)toPixelInt(canvasWidth, minx, maxx, maxx),canvasHeight-locxAxisInPixels+20, paint);
 			}
-			canvas.drawText(""+maxx, (float)toPixelInt(canvasWidth, minx, maxx, maxx),canvasHeight-locxAxisInPixels+20, paint);
+			else
+			{
+				for (int i=1;i<=scl;i++)
+				{
+					temp = Math.round(10*(miny+(i-1)*(maxy-miny)/scl))/10;
+					canvas.drawText(""+temp, locyAxisInPixels+20,canvasHeight-(float)toPixelInt(canvasHeight, miny, maxy, temp), paint);
+				}
 			canvas.drawText(""+maxy, locyAxisInPixels+20,canvasHeight-(float)toPixelInt(canvasHeight, miny, maxy, maxy), paint);
-		}		
+			}
+		}
 	}
 	
 	private int[] toPixel(float pixels, float min, float max, float[] value) 
@@ -80,7 +121,7 @@ public class GraphView extends View
 		return (pint);
 	}
 	
-	private void getAxes(float[] xValues, float[] yValues) 
+	private void getAxes(float[] xValues, float[][] yValues) 
 	{		
 		// The first xValue is the smallest and the last the biggest
 		minx=xValues[0];
@@ -113,21 +154,23 @@ public class GraphView extends View
 		return (pint);
 	}
 
-	private float getMax(float[] v) 
+	private float getMax(float[][] v) 
 	{
-		float largest = v[0];
-		for (int i = 0; i < v.length; i++)
-			if (v[i] > largest)
-				largest = v[i];
+		float largest = v[0][0];
+		for(int i=0; i<6; i++)
+			for (int n = 0; n < v[i].length; n++)
+				if (v[i][n] > largest)
+					largest = v[i][n];
 		return largest;
 	}
 
-	private float getMin(float[] v) 
+	private float getMin(float[][] v) 
 	{
-		float smallest = v[0];
-		for (int i = 0; i < v.length; i++)
-			if (v[i] < smallest)
-				smallest = v[i];
+		float smallest = v[0][0];
+		for(int i=0; i<6; i++)
+			for (int n = 0; n < v[i].length; n++)
+				if (v[i][n] < smallest)
+					smallest = v[i][n];
 		return smallest;
 	}
 }
