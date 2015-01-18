@@ -23,7 +23,7 @@ public class GraphActivity extends ActionBarActivity
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_settings);
+		/*setContentView(R.layout.activity_settings);
 		Button btn = (Button) findViewById(R.id.graphButton);
 		btn.setTransformationMethod(null);
 		btn.setOnClickListener(new View.OnClickListener(){
@@ -31,12 +31,10 @@ public class GraphActivity extends ActionBarActivity
 			public void onClick(View v){
 				getAxesFromText();
 				getFunctionsFromText();
-				buildStuff();
+				drawGraph();
 			}
-		});
-		/*getAxesFromText();
-		getFunctionsFromText();
-		buildStuff();*/
+		});*/
+		openSettings();
 	}
 	
 	@Override
@@ -67,7 +65,7 @@ public class GraphActivity extends ActionBarActivity
 			public void onClick(View v){
 				getAxesFromText();
 				getFunctionsFromText();
-				buildStuff();
+				drawGraph();
 			}
 		});
 	}
@@ -97,7 +95,7 @@ public class GraphActivity extends ActionBarActivity
 				functions[i] = editFunctions[i].getText().toString();
 	}
 	
-	protected void buildStuff()
+	protected void drawGraph()
 	{
 		float[] xvalues = new float[(int)(xMax-xMin)*100+1];
         float[][] functionValues = new float[6][(int)(xMax-xMin)*100+1];

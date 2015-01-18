@@ -8,7 +8,7 @@
     <string name="standard">Basic</string>
     <string name="geometric">Geo</string>
     <string name="functions">Func</string>
-    <string name="probability">Prob</string>
+    <string name="rest">Rest</string>
     <string name="zero">0</string>
     <string name="one">1</string>
     <string name="two">2</string>
@@ -24,6 +24,7 @@
     <string name="br_close">)</string>
     <string name="del">←</string>
     <string name="equals">=</string>
+    <string name="approximate">≈</string>
     <string name="multiply">*</string>
     <string name="divide">/</string>
     <string name="add">+</string>
@@ -31,14 +32,14 @@
     <string name="delete">del</string>
     <string name="x">X</string>
     <string name="ans">ans</string>
-    <string name="sin">sin</string>
-    <string name="cos">cos</string>
-    <string name="tan">tan</string>
-    <string name="asin">asin</string>
-    <string name="acos">acos</string>
-    <string name="atan">atan</string>
-    <string name="log">log</string>
-    <string name="ln">ln</string>
+    <string name="sin">Sin(..)</string>
+    <string name="cos">Cos(..)</string>
+    <string name="tan">Tan(..)</string>
+    <string name="asin">ArcSin(..)</string>
+    <string name="acos">ArcCos(..)</string>
+    <string name="atan">ArcTan(..)</string>
+    <string name="log">log(..)</string>
+    <string name="ln">ln(..)</string>
     <string name="pi">π</string>
     <string name="e">e</string>
     <string name="E">E</string>
@@ -49,6 +50,37 @@
     <string name="sqrt">√x</string>
     <string name="root">ⁿ√x</string>
     <string name="inv">1/x</string>
+    <string name="diff">y\'(..)</string>
+    <string name="integr">∫(..)dx</string>
+    <string name="greater">></string>   
+    <string name="smaller">&lt;</string>
+    <string name="constants">Constants</string>
+    <string name="unequal">≠</string>
+    <string name="gre">≥</string>
+    <string name="sme">≤</string>
+    <string name="fact">!</string>
+    <string name="ncr">NcR</string>
+    <string name="npr">NpR</string>
+    <string name="about">About</string>
+    <string name="graphbutton">Draw a Graph</string>    
+    <string name="emptytext"></string>    
     <string name="toGraph">To Graph</string>
+    <string name="xmin">xMin</string>
+    <string name="xmax">xMax</string>
+    <string name="xscl">xScl</string>
+    <string name="yscl">yScl</string>
+    <string name="xminvalue">-10.0</string>
+    <string name="xmaxvalue">10.0</string>
+    <string name="xsclvalue">10</string>
+    <string name="ysclvalue">10</string>
+    <string name="f1">F1:</string>
+    <string name="f2">F2:</string>
+    <string name="f3">F3:</string>
+    <string name="f4">F4:</string>
+    <string name="f5">F5:</string>
+    <string name="f6">F6:</string>
+    <string name="axistitle">Axis Appearance</string>
+    <string name="functionstitle">Functions</string>
+    <string name="sinfunction">Sin(x)</string>
 
 </resources>
