@@ -12,6 +12,8 @@ import android.widget.LinearLayout;*/
 
 package com.teamindecisive.calcurmath;
 
+import org.matheclipse.core.expression.F;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -93,7 +95,15 @@ public class MainActivity extends ActionBarActivity{
 
         // Do not show the preview balloons
         keyboardView.setPreviewEnabled(false);
+        // We let the evalengine start up by differentiating and integrating
+        // We differentiate and integrate to make these parts of the engine active already
+        loadEvalEngine();
 		}
+	
+	protected void loadEvalEngine(){
+		Calculus.lowerCase("Integrate(x,x)");
+		Calculus.lowerCase("Diff(x,x)");
+	}
 	
 	protected OnKeyboardActionListener onKeyboardActionListener = new OnKeyboardActionListener() {
         @Override public void onKey(int primaryCode, int[] keyCodes) 
