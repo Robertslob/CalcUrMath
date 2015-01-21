@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyHeight="10%p"
+    android:keyWidth="30%p" >
+    
+    <Row
+        android:keyWidth="19%p" >
+        <Key android:codes="10001"    android:keyLabel="Basic" android:horizontalGap="1%p" android:keyEdgeFlags="left"/>
+        <Key android:codes="401"    android:keyLabel="&lt;" android:horizontalGap="1%p"/>
+        <Key android:codes="402"    android:keyLabel=">" android:horizontalGap="1%p"/>        
+        <Key android:codes="403"    android:keyLabel="≤" android:horizontalGap="1%p"/>
+        <Key android:codes="404"    android:keyLabel="≥" android:horizontalGap="1%p" android:keyEdgeFlags="right"/>               
+    </Row>
+        
+    <Row
+		android:keyWidth="19%p" >
+        <Key android:codes="10002"    android:keyLabel="Func" android:horizontalGap="1%p" android:keyEdgeFlags="left"/>
+        <Key android:codes="406"    android:keyLabel="NcR" android:horizontalGap="1%p"/>
+        <Key android:codes="407"    android:keyLabel="NpR" android:horizontalGap="1%p"/>
+        <Key android:codes="405"    android:keyLabel="!" android:horizontalGap="1%p"/> 
+        <Key android:codes="408"    android:keyLabel="Constants" android:horizontalGap="1%p" android:keyEdgeFlags="right"/>        
+    </Row>
+    
+    <Row>
+        <Key android:codes="10003"    android:keyLabel="Rest" android:horizontalGap="1%p" android:keyWidth="19%p" android:keyEdgeFlags="left"/>
+        <Key android:codes="10005"    android:keyLabel="Learn some more about us!" android:horizontalGap="1%p" android:keyWidth="79%p" android:keyEdgeFlags="right"/>
+    </Row>
+ </Keyboard>
+		           

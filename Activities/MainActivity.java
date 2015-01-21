@@ -12,110 +12,151 @@ import android.widget.LinearLayout;*/
 
 package com.teamindecisive.calcurmath;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.inputmethodservice.Keyboard;
+import android.inputmethodservice.KeyboardView;
+import android.inputmethodservice.KeyboardView.OnKeyboardActionListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.teamindecisive.calcurmath.function.Calculus;
 
 
-public class MainActivity extends ActionBarActivity implements OnClickListener{
+public class MainActivity extends ActionBarActivity{
 	
-	Button [] buttons;
 	TextView [] ansViews;
 	EditText txtEdit;
-	LinearLayout [] tabs; 
+	Button equals, approximate;
+	Keyboard basicKeyboard, functionKeyboard, restKeyboard;
+	KeyboardView keyboardView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.activity_main);	
-		buttons = new Button[56];
-		ansViews = new TextView[12];
-		tabs = new LinearLayout[4];
+		ansViews = new TextView[24];
 		txtEdit = (EditText)findViewById(R.id.TextInput);
-		txtEdit.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        txtEdit.setTextIsSelectable(true);	
-		// Add the tabs, buttons and answers from the layout to their arrays
-		setTabs();
-		setButtons();
+		// Set the buttons
+		equals = (Button) findViewById(R.id.Button_equals);
+		approximate = (Button) findViewById(R.id.Button_approximate);
+        
+        // Set the listeners for the equals and approximate button
+        setButtonListeners();
+        
+		//txtEdit.setRawInputType(InputType.TYPE_CLASS_TEXT);
+        //txtEdit.setTextIsSelectable(true);	
+		// Add the answers views from the layout to its array
 		setAnsViews();
-		// set the onClickListener for the buttons
-        for(int i=0; i<56; i++)
-        	buttons[i].setOnClickListener(this);
-	}
+		
+        // Create the Keyboards
+        basicKeyboard = new Keyboard(this, R.xml.basickeyboard);
+        functionKeyboard = new Keyboard(this, R.xml.functionkeyboard);
+        restKeyboard = new Keyboard(this, R.xml.restkeyboard);
+
+        // Lookup the KeyboardView
+        keyboardView= (KeyboardView)findViewById(R.id.keyboardview);
+        // Attach the basic keyboard to the view
+        keyboardView.setKeyboard( basicKeyboard );
+        
+        // Install the key handler 
+        keyboardView.setOnKeyboardActionListener(onKeyboardActionListener);
+        
+        // make the txtEdit open our custom keyboard when clicked upon
+        txtEdit.setOnClickListener(new OnClickListener(){
+        	public void onClick(View v){
+        		showKeyboard(v);
+        	}
+        });       
+        
+        txtEdit.setOnFocusChangeListener(new OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if( hasFocus ) showKeyboard(v); else hideKeyboard(v);
+            }
+        });
+        
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        // Do not show the preview balloons
+        keyboardView.setPreviewEnabled(false);
+		}
 	
-	protected void setButtons(){
-		buttons[0]  = (Button) findViewById(R.id.Button_zero);
-        buttons[1]  = (Button) findViewById(R.id.Button_one);
-        buttons[2]  = (Button) findViewById(R.id.Button_two);
-        buttons[3]  = (Button) findViewById(R.id.Button_three);
-        buttons[4]  = (Button) findViewById(R.id.Button_four);
-        buttons[5]  = (Button) findViewById(R.id.Button_five);
-        buttons[6]  = (Button) findViewById(R.id.Button_six);
-        buttons[7]  = (Button) findViewById(R.id.Button_seven);
-        buttons[8]  = (Button) findViewById(R.id.Button_eight);
-        buttons[9]  = (Button) findViewById(R.id.Button_nine);
-        buttons[10] = (Button) findViewById(R.id.Button_substract);
-        buttons[11] = (Button) findViewById(R.id.Button_plus);
-        buttons[12] = (Button) findViewById(R.id.Button_del);
-        buttons[13] = (Button) findViewById(R.id.Button_closebr);
-        buttons[14] = (Button) findViewById(R.id.Button_openbr);
-        buttons[15] = (Button) findViewById(R.id.Button_x);
-        buttons[16] = (Button) findViewById(R.id.Button_ans);
-        buttons[17] = (Button) findViewById(R.id.Button_multiply);
-        buttons[18] = (Button) findViewById(R.id.Button_divide);
-        buttons[19] = (Button) findViewById(R.id.Button_dot);
-        buttons[20] = (Button) findViewById(R.id.Button_equals);
-        buttons[21] = (Button) findViewById(R.id.Button_approximate);
-        buttons[22] = (Button) findViewById(R.id.Button_rest);
-        buttons[23] = (Button) findViewById(R.id.Button_func);
-        buttons[24] = (Button) findViewById(R.id.Button_bsc);
-        buttons[25] = (Button) findViewById(R.id.Button_geo);
-        buttons[26] = (Button) findViewById(R.id.Button_sin);
-        buttons[27] = (Button) findViewById(R.id.Button_asin);
-        buttons[28] = (Button) findViewById(R.id.Button_cos);
-        buttons[29] = (Button) findViewById(R.id.Button_tan);
-        buttons[30] = (Button) findViewById(R.id.Button_atan);
-        buttons[31] = (Button) findViewById(R.id.Button_acos);
-        buttons[32] = (Button) findViewById(R.id.Button_squared);
-        buttons[33] = (Button) findViewById(R.id.Button_sqrt);
-        buttons[34] = (Button) findViewById(R.id.Button_power);
-        buttons[35] = (Button) findViewById(R.id.Button_root);
-        buttons[36] = (Button) findViewById(R.id.Button_inv);
-        buttons[37] = (Button) findViewById(R.id.Button_abs);
-        buttons[38] = (Button) findViewById(R.id.Button_log);
-        buttons[39] = (Button) findViewById(R.id.Button_ln);
-        buttons[40] = (Button) findViewById(R.id.Button_diff);
-        buttons[41] = (Button) findViewById(R.id.Button_integr);
-        buttons[42] = (Button) findViewById(R.id.Button_pi);
-        buttons[43] = (Button) findViewById(R.id.Button_graph);
-        buttons[44] = (Button) findViewById(R.id.Button_equalsrest);
-        buttons[45] = (Button) findViewById(R.id.Button_greater);
-        buttons[46] = (Button) findViewById(R.id.Button_smaller);
-        buttons[47] = (Button) findViewById(R.id.Button_constants);
-        buttons[48] = (Button) findViewById(R.id.Button_unequal);
-        buttons[49] = (Button) findViewById(R.id.Button_greaterequal);
-        buttons[50] = (Button) findViewById(R.id.Button_smallerequal);
-        buttons[51] = (Button) findViewById(R.id.Button_graphrest);
-        buttons[52] = (Button) findViewById(R.id.Button_factorial);
-        buttons[53] = (Button) findViewById(R.id.Button_ncr);
-        buttons[54] = (Button) findViewById(R.id.Button_npr);
-        buttons[55] = (Button) findViewById(R.id.Button_about);
-	}
+	protected OnKeyboardActionListener onKeyboardActionListener = new OnKeyboardActionListener() {
+        @Override public void onKey(int primaryCode, int[] keyCodes) 
+        {             
+        	// Do an action for each key pressed on the keyboard
+             switch(primaryCode){
+	             case 10001: keyboardView.setKeyboard(basicKeyboard); 
+	             	break;
+	             case 10002: keyboardView.setKeyboard(functionKeyboard); 
+	             	break;
+	             case 10003: keyboardView.setKeyboard(restKeyboard); 
+	             	break;
+	             case 10004: goToGraph(); 
+	             	break;
+	             case 10005: showAbout(); 
+	             	break;
+	             case 100: 
+	            	int start = Math.max(txtEdit.getSelectionStart(), 0);
+	    			int end = Math.max(txtEdit.getSelectionEnd(), 0);
+	    			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+	    					ansViews[0].getText().toString(), 0, ansViews[0].getText().length());
+	    			break;
+	             /*case 901: diff(); 
+	             	break;
+	             case 902: integrate(); 
+	             	break;*/
+	             	// The rest of the cases can be handled with the onClickSwitch class
+	             default: txtEdit = onClickSwitch.txtSwitch(txtEdit, primaryCode); 
+	             	break;        
+             }
+        }
+
+        @Override public void onPress(int arg0) {
+        }
+
+        @Override public void onRelease(int primaryCode) {
+        }
+
+        @Override public void onText(CharSequence text) {
+        }
+
+        @Override public void swipeDown() {
+        	hideKeyboard(keyboardView);
+        }
+
+        @Override public void swipeLeft() {
+        	if(keyboardView.getKeyboard().equals(basicKeyboard))
+        		keyboardView.setKeyboard(functionKeyboard);
+        	else if(keyboardView.getKeyboard().equals(functionKeyboard))
+        		keyboardView.setKeyboard(restKeyboard);
+        }
+
+        @Override public void swipeRight() {
+        	if(keyboardView.getKeyboard().equals(functionKeyboard))
+        		keyboardView.setKeyboard(basicKeyboard);
+        	else if(keyboardView.getKeyboard().equals(restKeyboard))
+        		keyboardView.setKeyboard(functionKeyboard);        	
+        }
+
+        @Override public void swipeUp() {
+        	keyboardView.setKeyboard(restKeyboard);
+        }
+    };
 	
 	protected void setAnsViews(){
 		ansViews[0]  = (TextView) findViewById(R.id.ansView1);
@@ -130,8 +171,20 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 		ansViews[9]  = (TextView) findViewById(R.id.ansView10);
 		ansViews[10] = (TextView) findViewById(R.id.ansView11);
 		ansViews[11] = (TextView) findViewById(R.id.ansView12);
+		ansViews[12]  = (TextView) findViewById(R.id.ansView13);
+		ansViews[13]  = (TextView) findViewById(R.id.ansView14);
+		ansViews[14]  = (TextView) findViewById(R.id.ansView15);
+		ansViews[15]  = (TextView) findViewById(R.id.ansView16);
+		ansViews[16]  = (TextView) findViewById(R.id.ansView17);
+		ansViews[17]  = (TextView) findViewById(R.id.ansView18);
+		ansViews[18]  = (TextView) findViewById(R.id.ansView19);
+		ansViews[19]  = (TextView) findViewById(R.id.ansView20);
+		ansViews[20]  = (TextView) findViewById(R.id.ansView21);
+		ansViews[21]  = (TextView) findViewById(R.id.ansView22);
+		ansViews[22] = (TextView) findViewById(R.id.ansView23);
+		ansViews[23] = (TextView) findViewById(R.id.ansView24);
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -145,75 +198,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		if (id == R.id.action_graph) {
+			goToGraph();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-	
-	@Override
-    public void onClick(View v){
-		switch(v.getId()) {
-		case R.id.Button_equals:
-			moveAnsText();
-			ansViews[0].setText(txtEdit.getText().toString());
-			ansViews[1].setText(Calculus.lowerCase(txtEdit.getText().toString()));
-			txtEdit.setText("");
-			break;
-			 
-		case R.id.Button_approximate:
-			moveAnsText();
-			ansViews[0].setText(txtEdit.getText().toString());
-			ansViews[1].setText(Calculus.doubleLowerCase(txtEdit.getText().toString()));
-			txtEdit.setText("");
-			break;
-			
-		case R.id.Button_diff: 
-			
-			diff();
-			/*start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"diff()", 0, 6);
-	   	 	txtEdit.setSelection(start+5);*/
-	   	 	break;
-		
-		case R.id.Button_about: 
-			showAbout();
-			break;
-
-		case R.id.Button_graph:
-			goToGraph();   
-			break;	   
-	  
-		case R.id.Button_bsc:
-			tabsInvisible();
-			tabs[0].setVisibility(View.VISIBLE);
-			break;
-			
-		case R.id.Button_func: 
-			tabsInvisible();
-			tabs[1].setVisibility(View.VISIBLE);
-			break;
-	     
-		case R.id.Button_geo:
-			tabsInvisible();
-			tabs[2].setVisibility(View.VISIBLE);
-			break;
-	 
-		case R.id.Button_rest:
-			tabsInvisible();
-			tabs[3].setVisibility(View.VISIBLE);
-			break;
-		default: txtEdit = onClickSwitch.txtSwitch(txtEdit, v);
-		}    
-	}
-	
-	protected void setTabs(){
-		tabs[0] = (LinearLayout) findViewById(R.id.bscLinLay);
-		tabs[1] = (LinearLayout) findViewById(R.id.funcLinLay);
-		tabs[2] = (LinearLayout) findViewById(R.id.geoLinLay);
-		tabs[3] = (LinearLayout) findViewById(R.id.restLinLay);		
 	}
 	
 	public void showAbout(){
@@ -234,14 +223,12 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 		       });
 		builder.show();		 
 	}
-	
+	/*
 	public void diff(){
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		final EditText input = new EditText(this);
-		//input.setText("diff()");
-		//input.setSelection(4);
 		builder.setMessage("Enter the function you would like to differentiate below.")
-			   .setTitle("Differentiatie")
+			   .setTitle("Differentiation")
 			   .setView(input)
 			   .setPositiveButton("Diffentiate!", new DialogInterface.OnClickListener() {
 				   public void onClick(DialogInterface dialog, int id) {
@@ -257,13 +244,78 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 		builder.show();
 	}
 	
-	public void tabsInvisible(){
-		for(int i=0; i<4; i++)
-			tabs[i].setVisibility(View.INVISIBLE);		
+	public void integrate(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		final EditText input = new EditText(this);
+		builder.setMessage("Enter the function you would like to integrate below.")
+			   .setTitle("Integration")
+			   .setView(input)
+			   .setPositiveButton("Integrate!", new DialogInterface.OnClickListener() {
+				   public void onClick(DialogInterface dialog, int id) {
+					   String inputString = input.getText().toString();
+					   moveAnsText();
+					   ansViews[0].setText(inputString);
+					   ansViews[1].setText(Calculus.lowerCase("Integrate(" + inputString + ", x)"));
+		           }})
+			   .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+				   public void onClick(DialogInterface dialog, int id) {
+					   dialog.cancel();				
+				   }});
+		builder.show();
+	}*/
+	
+	protected void setButtonListeners(){
+		
+		equals.setOnClickListener(new OnClickListener(){
+			public void onClick(View v){
+				if(!txtEdit.getText().toString().isEmpty()){
+					try{						
+						moveAnsText();
+						ansViews[0].setText(txtEdit.getText().toString());
+						ansViews[1].setText(Calculus.lowerCase(txtEdit.getText().toString()));													
+					}
+					catch(Exception e){
+						ansViews[1].setText("Error");
+					}
+					txtEdit.getText().clear();
+				}
+			}						
+		});		
+		
+		approximate.setOnClickListener(new OnClickListener(){
+			public void onClick(View v){
+				if(!txtEdit.getText().toString().isEmpty()){
+					try{					
+						moveAnsText();
+						ansViews[0].setText(txtEdit.getText().toString());
+						ansViews[1].setText(Calculus.doubleLowerCase(txtEdit.getText().toString()));							
+					}
+					catch(Exception e){
+						ansViews[1].setText("Error");	
+					}
+					txtEdit.getText().clear();
+				}
+			}			
+		});
+	}
+	
+	protected String optimizeInput(String s){
+		s = s.replace('i', 'I');
+		s = s.replace("[","(");
+		s = s.replace("]",",x)");
+		return s;
+	}
+	
+	protected String optimizeAnswer(String s){
+		s = s.replace("sec", "1/cos");
+		s = s.replace("csc", "1/sin");
+		s = s.replace("cot", "1/tan");
+		s = s.replace('I', 'i');
+		return s;
 	}
 	
 	protected void moveAnsText(){
-		for(int i=11; i>1; i--)
+		for(int i=23; i>1; i--)
 			ansViews[i].setText(ansViews[i-2].getText().toString());
 	}
 	
@@ -272,4 +324,15 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 		Intent i = new Intent(this, GraphActivity.class);
 		startActivity(i);
 	}
+	
+	public void hideKeyboard(View v){
+    	keyboardView.setVisibility(View.GONE);
+        keyboardView.setEnabled(false);
+    }
+    
+    public void showKeyboard(View v){
+       keyboardView.setVisibility(View.VISIBLE);
+       keyboardView.setEnabled(true);
+       if( v!=null)((InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
 }

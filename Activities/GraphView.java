@@ -16,16 +16,18 @@ public class GraphView extends View
 	private float maxx,maxy,minx,miny,locxAxis,locyAxis;
 	private int xScl, yScl;
 	
-	public GraphView(Context context, float[] xValues, float[][] functionValues, int xScl, int yScl) 
+	public GraphView(Context context, float[] xValues, float[][] functionValues, int xScl, int yScl, double yMin, double yMax) 
 	{
 		super(context);
 		this.xValues=xValues;
 		this.functionValues=functionValues;
 		this.xScl=xScl;
 		this.yScl=yScl;
+		miny = (float)yMin;
+		maxy = (float)yMax;
 		paint = new Paint();
 
-		getAxes(xValues, functionValues);		
+		getAxes(xValues);//, functionValues);		
 	}
 
 	@Override
@@ -40,12 +42,6 @@ public class GraphView extends View
 		for(int i = 0; i<6; i++)
 			if(functionValues[i]!= null)
 				functionValuesInPixels[i] = toPixel(canvasHeight, miny, maxy, functionValues[i]);
-		/*int[] F1ValuesInPixels = toPixel(canvasHeight, miny, maxy, functionValues[1]);
-		int[] F2ValuesInPixels = toPixel(canvasHeight, miny, maxy, functionValues[2]);
-		int[] F3ValuesInPixels = toPixel(canvasHeight, miny, maxy, functionValues[3]);
-		int[] F4ValuesInPixels = toPixel(canvasHeight, miny, maxy, functionValues[4]);
-		int[] F5ValuesInPixels = toPixel(canvasHeight, miny, maxy, functionValues[5]);
-		int[] F6ValuesInPixels = toPixel(canvasHeight, miny, maxy, functionValues[6]);*/
 		int locxAxisInPixels = toPixelInt(canvasHeight, miny, maxy, locxAxis);
 		int locyAxisInPixels = toPixelInt(canvasWidth, minx, maxx, locyAxis);
 
@@ -57,12 +53,6 @@ public class GraphView extends View
 			for(int n = 0; n<6; n++)
 				if(functionValuesInPixels[n]!=null)
 					canvas.drawLine(xValuesInPixels[i], canvasHeight-functionValuesInPixels[n][i],xValuesInPixels[i+1],canvasHeight-functionValuesInPixels[n][i+1],paint);
-			/*canvas.drawLine(xValuesInPixels[i],canvasHeight-F1ValuesInPixels[i],xValuesInPixels[i+1],canvasHeight-F1ValuesInPixels[i+1],paint);
-			canvas.drawLine(xValuesInPixels[i],canvasHeight-F2ValuesInPixels[i],xValuesInPixels[i+1],canvasHeight-F2ValuesInPixels[i+1],paint);
-			canvas.drawLine(xValuesInPixels[i],canvasHeight-F3ValuesInPixels[i],xValuesInPixels[i+1],canvasHeight-F3ValuesInPixels[i+1],paint);
-			canvas.drawLine(xValuesInPixels[i],canvasHeight-F4ValuesInPixels[i],xValuesInPixels[i+1],canvasHeight-F4ValuesInPixels[i+1],paint);
-			canvas.drawLine(xValuesInPixels[i],canvasHeight-F5ValuesInPixels[i],xValuesInPixels[i+1],canvasHeight-F5ValuesInPixels[i+1],paint);
-			canvas.drawLine(xValuesInPixels[i],canvasHeight-F6ValuesInPixels[i],xValuesInPixels[i+1],canvasHeight-F6ValuesInPixels[i+1],paint);*/
 		}
 		
 		// Draw the black line for the axes
@@ -121,14 +111,14 @@ public class GraphView extends View
 		return (pint);
 	}
 	
-	private void getAxes(float[] xValues, float[][] yValues) 
+	private void getAxes(float[] xValues)//, float[][] yValues) 
 	{		
 		// The first xValue is the smallest and the last the biggest
 		minx=xValues[0];
 		maxx=xValues[xValues.length-1];
 		// For the yValue, we have to find it through the getMin and getMax methods
-		miny=getMin(yValues);
-		maxy=getMax(yValues);
+		//miny=getMin(yValues);
+		//maxy=getMax(yValues);
 		
 		if (minx>=0)
 			locyAxis=minx;
@@ -153,7 +143,8 @@ public class GraphView extends View
 		pint = (int)p;
 		return (pint);
 	}
-
+	
+	/*
 	private float getMax(float[][] v) 
 	{
 		float largest = v[0][0];
@@ -161,7 +152,7 @@ public class GraphView extends View
 			for (int n = 0; n < v[i].length; n++)
 				if (v[i][n] > largest)
 					largest = v[i][n];
-		return largest;
+		return 10;
 	}
 
 	private float getMin(float[][] v) 
@@ -171,6 +162,6 @@ public class GraphView extends View
 			for (int n = 0; n < v[i].length; n++)
 				if (v[i][n] < smallest)
 					smallest = v[i][n];
-		return smallest;
-	}
+		return -10;
+	}*/
 }

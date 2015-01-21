@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyHeight="10%p"
+    android:keyWidth="16%p" >
+    
+    <Row>
+        <Key android:codes="10001"    android:keyLabel="Basic" android:horizontalGap="1%p" android:keyEdgeFlags="left"/>
+        <Key android:codes="201"    android:keyLabel="x²" android:horizontalGap="1%p"/>
+        <Key android:codes="202"    android:keyLabel="√x" android:horizontalGap="1%p"/>        
+        <Key android:codes="203"    android:keyLabel="xⁿ" android:horizontalGap="1%p"/>
+        <Key android:codes="204"    android:keyLabel="ⁿ√x" android:horizontalGap="1%p"/>
+        <Key android:codes="901"    android:keyLabel="y\'(..)" android:horizontalGap="1%p" android:keyEdgeFlags="right"/>        
+    </Row>
+        
+    <Row>
+        <Key android:codes="10002"    android:keyLabel="Func" android:horizontalGap="1%p" android:keyEdgeFlags="left"/>
+        <Key android:codes="205"    android:keyLabel="1/x" android:horizontalGap="1%p"/>
+        <Key android:codes="206"    android:keyLabel="|x|" android:horizontalGap="1%p"/>
+        <Key android:codes="207"    android:keyLabel="log(..)" android:horizontalGap="1%p"/>
+        <Key android:codes="208"    android:keyLabel="ln(..)" android:horizontalGap="1%p"/>
+        <Key android:codes="902"    android:keyLabel="∫(..)dx" android:horizontalGap="1%p" android:keyEdgeFlags="right"/>        
+    </Row>
+    
+    <Row
+        android:keyWidth="19%p" >
+        <Key android:codes="10003"    android:keyLabel="Rest" android:horizontalGap="1%p" android:keyEdgeFlags="left"/>
+        <Key android:codes="301"    android:keyLabel="Sin(..)" android:horizontalGap="1%p" />        
+        <Key android:codes="302"    android:keyLabel="Cos(..)" android:horizontalGap="1%p" />
+        <Key android:codes="303"    android:keyLabel="Tan(..)" android:horizontalGap="1%p" />
+        <Key android:codes="304"    android:keyLabel="π" android:horizontalGap="1%p" android:keyEdgeFlags="right"/>      
+    </Row>    
+
+    <Row
+        android:keyWidth="19%p" >        
+        <Key android:codes="305"    android:keyLabel="x" android:horizontalGap="1%p" android:keyEdgeFlags="left"/>  
+        <Key android:codes="306"    android:keyLabel="ArcSin(..)" android:horizontalGap="1%p" />
+        <Key android:codes="307"    android:keyLabel="ArcCos(..)" android:horizontalGap="1%p" />        
+        <Key android:codes="308"    android:keyLabel="ArcTan(..)" android:horizontalGap="1%p" />
+        <Key android:codes="10004"    android:keyLabel="Graph" android:horizontalGap="1%p" android:keyEdgeFlags="right"/>
+    </Row>    
+    
+ </Keyboard>
+		           

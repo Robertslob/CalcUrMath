@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyHeight="10%p"
+    android:keyWidth="30%p" >
+    
+    <Row>
+        <Key android:codes="10001"    android:keyLabel="Basic" android:horizontalGap="1%p" android:keyEdgeFlags="left"/>
+        <Key android:codes="101"    android:keyLabel="+" android:horizontalGap="1%p"/>
+        <Key android:codes="102"    android:keyLabel="-" android:horizontalGap="1%p"/>
+        <Key android:codes="103"    android:keyLabel="*" android:horizontalGap="1%p"/>
+        <Key android:codes="104"    android:keyLabel="/" android:horizontalGap="1%p"/>
+        <Key android:codes="-1"    android:keyLabel="del" android:horizontalGap="1%p" android:isRepeatable="true" android:keyEdgeFlags="right"/>        
+    </Row>
+    
+    <Row>
+        <Key android:codes="10002"    android:keyLabel="Func" android:horizontalGap="1%p" android:keyEdgeFlags="left"/>        
+        <Key android:codes="7"    android:keyLabel="7" android:horizontalGap="1%p"/>
+        <Key android:codes="8"    android:keyLabel="8" android:horizontalGap="1%p"/>
+        <Key android:codes="9"    android:keyLabel="9" android:horizontalGap="1%p"/>
+        <Key android:codes="1002"    android:keyLabel="(" android:horizontalGap="1%p"/>
+        <Key android:codes="1003"    android:keyLabel=")" android:horizontalGap="1%p" android:keyEdgeFlags="right"/>
+        
+        
+    </Row>
+    
+    <Row> 
+        <Key android:codes="10003"    android:keyLabel="Rest" android:horizontalGap="1%p" android:keyEdgeFlags="left"/>
+        <Key android:codes="4"    android:keyLabel="4" android:horizontalGap="1%p" />        
+        <Key android:codes="5"    android:keyLabel="5" android:horizontalGap="1%p" />
+        <Key android:codes="6"    android:keyLabel="6" android:horizontalGap="1%p" />
+        <Key android:codes="1001"    android:keyLabel="." android:horizontalGap="1%p" />
+        <Key android:codes="105"    android:keyLabel="i" android:horizontalGap="1%p" android:keyEdgeFlags="right"/>        
+    </Row>    
+
+    <Row>
+        <Key android:codes="-100" android:keyLabel="clear" android:horizontalGap="1%p" android:keyEdgeFlags="left"/>        
+        <Key android:codes="1"    android:keyLabel="1" android:horizontalGap="1%p" />
+        <Key android:codes="2"    android:keyLabel="2" android:horizontalGap="1%p" />        
+        <Key android:codes="3"    android:keyLabel="3" android:horizontalGap="1%p" />
+        <Key android:codes="0"    android:keyLabel="0" android:horizontalGap="1%p" />
+        <Key android:codes="100"    android:keyLabel="ans" android:horizontalGap="1%p" android:keyEdgeFlags="right"/>
+    </Row>    
+ </Keyboard>
+		           

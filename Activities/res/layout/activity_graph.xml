@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -9,17 +10,20 @@
     tools:context="com.teamindecisive.calcurmath.GraphSettings" >
 
     <ScrollView
-        android:id="@+id/scrollView1"
+        android:id="@+id/scrollAns"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentRight="true"        
+        android:layout_alignParentTop="true"
+        tools:ignore="UselessParent" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <LinearLayout
@@ -31,7 +35,7 @@
                     android:id="@+id/functionTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Functions"
+                    android:text="@string/functionstitle"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="30sp" />
 
@@ -43,19 +47,14 @@
                         android:id="@+id/F1_Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="F1: "
+                        android:text="@string/f1"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
                         android:id="@+id/F1_Edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:text="Sin(x)" >
-
-                        <requestFocus />
-                    </EditText>
+                        style="@style/functionEdit"
+                        android:text="@string/sinfunction" />
+                    
                 </LinearLayout>
 
                 <LinearLayout
@@ -66,15 +65,12 @@
                         android:id="@+id/F2_Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="F2: "
+                        android:text="@string/f2"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
                         android:id="@+id/F2_Edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.74"
-                        android:ems="10" />
+                        style="@style/functionEdit" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -85,15 +81,12 @@
                         android:id="@+id/F3_Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="F3: "
+                        android:text="@string/f3"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
                         android:id="@+id/F3_Edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10" />
+                        style="@style/functionEdit" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -104,15 +97,12 @@
                         android:id="@+id/F4_Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="F4: "
+                        android:text="@string/f4"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
                         android:id="@+id/F4_Edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10" />
+                        style="@style/functionEdit" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -123,15 +113,12 @@
                         android:id="@+id/F5_Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="F5: "
+                        android:text="@string/f5"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
                         android:id="@+id/F5_Edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10" />
+                        style="@style/functionEdit" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -142,15 +129,12 @@
                         android:id="@+id/F6_Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="F6: "
+                        android:text="@string/f6"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
                         android:id="@+id/F6_Edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10" />
+                        style="@style/functionEdit" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -163,7 +147,7 @@
                     android:id="@+id/axisTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Axis appearance"
+                    android:text="@string/axistitle"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="30sp" />
 
@@ -175,16 +159,13 @@
                         android:id="@+id/xMin_Text"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
-                        android:text="xMin"
+                        android:text="@string/xmin"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
                         android:id="@+id/xMin_Edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:text="-10.0" />
+                        style="@style/functionEdit"
+                        android:text="@string/xminvalue" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -195,16 +176,47 @@
                         android:id="@+id/xMax_Text"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
-                        android:text="xMax"
+                        android:text="@string/xmax"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
                         android:id="@+id/xMax_Edit"
-                        android:layout_width="wrap_content"
+                        style="@style/functionEdit"
+                        android:text="@string/xmaxvalue" />
+                </LinearLayout>
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/yMin_Text"
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:text="10.0" />
+                        android:text="@string/ymin"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <EditText
+                        android:id="@+id/yMin_Edit"
+                        style="@style/functionEdit"
+                        android:text="@string/yminvalue" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/yMax_Text"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ymax"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <EditText
+                        android:id="@+id/yMax_Edit"
+                        style="@style/functionEdit"
+                        android:text="@string/ymaxvalue" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -215,16 +227,13 @@
                         android:id="@+id/xScl_Text"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
-                        android:text="xScl"
+                        android:text="@string/xscl"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
                         android:id="@+id/xScl_Edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.95"
-                        android:ems="10"
-                        android:text="10" />
+                        style="@style/functionEdit"
+                        android:text="@string/xsclvalue" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -235,25 +244,36 @@
                         android:id="@+id/yScl_Text"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
-                        android:text="yScl"
+                        android:text="@string/yscl"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
                         android:id="@+id/yScl_Edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:text="10" />
+                        style="@style/functionEdit"
+                        android:text="@string/ysclvalue" />
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/graphButton"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Back to Graph"
-                    android:textSize="35sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <Button
+                        android:id="@+id/graphButton"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/toGraph"
+                        android:textSize="35sp" />
+                    
+                    <Button
+                        android:id="@+id/resetButton"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reset"
+                        android:textSize="35sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 

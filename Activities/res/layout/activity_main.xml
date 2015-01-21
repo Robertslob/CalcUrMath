@@ -1,0 +1,189 @@
+
+	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+	android:layout_height="match_parent"
+    tools:context="com.example.calcurmath.MainActivity"
+    tools:ignore="NestedWeights" >	    
+		    
+		    <android.inputmethodservice.KeyboardView
+		        android:id="@+id/keyboardview"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentBottom="true"
+		        android:layout_centerHorizontal="true"
+		        android:focusable="true"
+		        android:focusableInTouchMode="true"
+		        android:visibility="gone" />	
+	    
+		    <LinearLayout 
+		        android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical" >
+		        
+		    <ScrollView
+		        android:id="@+id/scrollAns"
+		        android:layout_width="match_parent"
+		        android:layout_height="0dp"
+		        android:layout_weight="40" >
+
+		        <LinearLayout
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:orientation="vertical" >
+
+		            <TextView
+		                android:id="@+id/ansView1"
+		                style="@style/AnsView" />
+
+		            <TextView
+		                android:id="@+id/ansView2"
+		                style="@style/AnsView.Out" />
+
+		            <TextView
+		                android:id="@+id/ansView3"
+		                style="@style/AnsView" />
+		            <TextView
+		                android:id="@+id/ansView4"
+		                style="@style/AnsView.Out" />
+
+		            <TextView
+		                android:id="@+id/ansView5"
+		                style="@style/AnsView" />
+
+		            <TextView
+		                android:id="@+id/ansView6"
+		                style="@style/AnsView.Out" />
+
+		            <TextView
+		                android:id="@+id/ansView7"
+		                style="@style/AnsView" />
+
+		            <TextView
+		                android:id="@+id/ansView8"
+		                style="@style/AnsView.Out" />
+
+		            <TextView
+		                android:id="@+id/ansView9"
+		                style="@style/AnsView" />
+
+		            <TextView
+		                android:id="@+id/ansView10"
+		                style="@style/AnsView.Out" />
+
+		            <TextView
+		                android:id="@+id/ansView11"
+		                style="@style/AnsView" />
+		            
+		            <TextView
+		                android:id="@+id/ansView12"
+		                style="@style/AnsView.Out" />
+		            
+		            <TextView
+		                android:id="@+id/ansView13"
+		                style="@style/AnsView" />
+		            
+		            <TextView
+		                android:id="@+id/ansView14"
+		                style="@style/AnsView.Out" />
+		            
+		            <TextView
+		                android:id="@+id/ansView15"
+		                style="@style/AnsView" />
+		            
+		            <TextView
+		                android:id="@+id/ansView16"
+		                style="@style/AnsView.Out" />
+		            
+		            <TextView
+		                android:id="@+id/ansView17"
+		                style="@style/AnsView" />
+		            
+		            <TextView
+		                android:id="@+id/ansView18"
+		                style="@style/AnsView.Out" />
+		            
+		            <TextView
+		                android:id="@+id/ansView19"
+		                style="@style/AnsView" />
+		            
+		            <TextView
+		                android:id="@+id/ansView20"
+		                style="@style/AnsView.Out" />
+		            
+		            <TextView
+		                android:id="@+id/ansView21"
+		                style="@style/AnsView" />
+		            
+		            <TextView
+		                android:id="@+id/ansView22"
+		                style="@style/AnsView.Out" />
+		            
+		            <TextView
+		                android:id="@+id/ansView23"
+		                style="@style/AnsView" />
+		            
+		            <TextView
+		                android:id="@+id/ansView24"
+		                style="@style/AnsView.Out" />
+		        </LinearLayout>
+		    </ScrollView>
+
+		    <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="0dp"
+		        android:layout_weight="15" 
+		        android:orientation="horizontal" >
+
+		        <EditText
+		            android:id="@+id/TextInput"
+		            android:inputType="text"
+		            android:layout_width="0dp"
+		            android:layout_height="match_parent"
+		            android:layout_weight="9"
+		            android:ems="10" 
+		            android:textSize="50sp" >
+		        </EditText>	        
+
+		        <LinearLayout
+		            android:layout_width="0dp"
+		            android:layout_height="match_parent"
+		            android:layout_weight="1"
+		            android:orientation="vertical" >
+
+		            <Button
+		                android:id="@+id/Button_equals"
+		                style="@style/BscButton" 
+		                android:layout_weight="1"
+		                android:text="@string/equals"
+		                android:textSize="25sp" />
+
+		            <Button
+		                android:id="@+id/Button_approximate"
+		                style="@style/BscButton" 
+		                android:layout_weight="1"
+		                android:text="@string/approximate"
+		                android:textSize="25sp" />
+
+		        </LinearLayout>
+
+		    </LinearLayout>	    
+
+		    <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="0dp"
+		        android:layout_weight="55" 
+		        android:baselineAligned="false" >
+		        
+		    </LinearLayout>	
+		    
+		    </LinearLayout>
+		    
+		            
+		        
+</RelativeLayout>
+		            	
+
+
+

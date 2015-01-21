@@ -1,85 +1,133 @@
 package com.teamindecisive.calcurmath;
 
-import android.view.View;
 import android.widget.EditText;
 
 public class onClickSwitch {
 	
-	public static EditText txtSwitch(EditText txtEdit, View v){
+	public static EditText txtSwitch(EditText txtEdit, int primaryCode){
 		int start;
 		int end;
-		switch(v.getId()) {
-		case R.id.Button_one:
+		switch(primaryCode) {
+		case 1:
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
 					"1", 0, 1);
 			break;
 			
-		case R.id.Button_two:
+		case 2:
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
 					"2", 0, 1);
 			break; 		  
 		  
-		case R.id.Button_three:
+		case 3:
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
 					"3", 0, 1);
 			break;		  
 		  
-		case R.id.Button_four:
+		case 4:
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
 					"4", 0, 1);
 			break;		  
 		  
-		case R.id.Button_five:
+		case 5:
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
 					"5", 0, 1);
 			break;		  
 		  
-		case R.id.Button_six:
+		case 6:
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
 					"6", 0, 1);
 			break;		  
 		  
-		case R.id.Button_seven:
+		case 7:
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
 	    		 	"7", 0, 1);
 			break;		  
 		  
-		case R.id.Button_eight:
+		case 8:
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
 					"8", 0, 1);
 			break;		  
 		  
-		case R.id.Button_nine:
+		case 9:
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
 					"9", 0, 1);
 			break;	 	
 		  
-		case R.id.Button_zero:
+		case 0:
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
 					"0", 0, 1);
 			break;
+			
+		case 101:
+			start = Math.max(txtEdit.getSelectionStart(), 0);
+			end = Math.max(txtEdit.getSelectionEnd(), 0);
+			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+					"+", 0, 1);
+			break;
 		  
-		case R.id.Button_closebr: 
+		case 102:
+			start = Math.max(txtEdit.getSelectionStart(), 0);
+			end = Math.max(txtEdit.getSelectionEnd(), 0);
+			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+					"-", 0, 1);
+			break;
+			
+		case 103:
+			start = Math.max(txtEdit.getSelectionStart(), 0);
+			end = Math.max(txtEdit.getSelectionEnd(), 0);
+			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+					"*", 0, 1);
+			break;	
+		      
+		case 104:
+			start = Math.max(txtEdit.getSelectionStart(), 0);
+			end = Math.max(txtEdit.getSelectionEnd(), 0);
+			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+					"/", 0, 1);
+			break;
+			
+		case 105:
+			start = Math.max(txtEdit.getSelectionStart(), 0);
+			end = Math.max(txtEdit.getSelectionEnd(), 0);
+			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+					"i", 0, 1);
+			break;
+			
+		case 1001: 
+			start = Math.max(txtEdit.getSelectionStart(), 0);
+			end = Math.max(txtEdit.getSelectionEnd(), 0);
+			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+					".", 0, 1);
+			break;
+			
+		case 1002:
+			start = Math.max(txtEdit.getSelectionStart(), 0);
+			end = Math.max(txtEdit.getSelectionEnd(), 0);
+			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+					"(", 0, 1);
+			break;
+		  
+		case 1003: 
             start = Math.max(txtEdit.getSelectionStart(), 0);
             end = Math.max(txtEdit.getSelectionEnd(), 0);            
             // if next char is a closed bracket, jump 1 space forward
@@ -96,57 +144,8 @@ public class onClickSwitch {
     					")", 0, 1);
             }			
 			break;
-		 
-		case R.id.Button_openbr:
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"(", 0, 1);
-			break;		  
-		 
-		case R.id.Button_x:
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"x", 0, 1);
-			break;
-		  
-		case R.id.Button_ans:
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"ans", 0, 3);
-			break;		  
-		      
-		case R.id.Button_plus:
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"+", 0, 1);
-			break;
-		  		      
-		case R.id.Button_multiply:
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"*", 0, 1);
-			break;
-		  		      
-		case R.id.Button_substract:
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"-", 0, 1);
-			break;
-		      
-		case R.id.Button_divide:
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"/", 0, 1);
-			break;
-			
-		case R.id.Button_del: 
+		
+		case -1: 
             start = Math.max(txtEdit.getSelectionStart(), 0);
             end = Math.max(txtEdit.getSelectionEnd(), 0);
             if(start!=end) {
@@ -161,15 +160,76 @@ public class onClickSwitch {
             		}
             	}
             break;
-	      
-		case R.id.Button_dot: 
+            
+		case -100: 
+            txtEdit.getText().clear();
+            break;
+            
+		case 201: 
+            start = Math.max(txtEdit.getSelectionStart(), 0);
+            end = Math.max(txtEdit.getSelectionEnd(), 0);
+            txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+                    "()^2", 0, 4);
+            txtEdit.setSelection(start+1);
+            break;
+
+		case 202: 
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					".", 0, 1);
+					"sqrt()", 0, 6);
+			txtEdit.setSelection(start+5);
+			break;
+
+		case 203: 
+			start = Math.max(txtEdit.getSelectionStart(), 0);
+			end = Math.max(txtEdit.getSelectionEnd(), 0);
+			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+					"()^()", 0, 5);
+			txtEdit.setSelection(start+1);
+			break;
+
+		case 204: 
+			start = Math.max(txtEdit.getSelectionStart(), 0);
+			end = Math.max(txtEdit.getSelectionEnd(), 0);
+			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+					"()^(1/)", 0, 6);
+			txtEdit.setSelection(start+1);
+			break;
+
+		case 205: 
+			start = Math.max(txtEdit.getSelectionStart(), 0);
+			end = Math.max(txtEdit.getSelectionEnd(), 0);
+			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+					"1/()", 0, 4);
+		 	txtEdit.setSelection(start+3);
+		 	break;
+		 	
+		case 206: 
+			start = Math.max(txtEdit.getSelectionStart(), 0);
+			end = Math.max(txtEdit.getSelectionEnd(), 0);
+			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+					"||", 0, 5);
+			txtEdit.setSelection(start+1);
 			break;
 			
-		case R.id.Button_sin: 
+		case 207: 
+			start = Math.max(txtEdit.getSelectionStart(), 0);
+			end = Math.max(txtEdit.getSelectionEnd(), 0);
+			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+					"log()", 0, 5);
+			txtEdit.setSelection(start+4);
+			break;
+			
+		case 208: 
+			start = Math.max(txtEdit.getSelectionStart(), 0);
+			end = Math.max(txtEdit.getSelectionEnd(), 0);
+			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+					"ln()", 0, 4);
+			txtEdit.setSelection(start+3);
+			break;		
+			
+		case 301: 
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
@@ -177,7 +237,7 @@ public class onClickSwitch {
 			txtEdit.setSelection(start+4);
 			break;
 
-		case R.id.Button_cos: 
+		case 302: 
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
@@ -185,7 +245,7 @@ public class onClickSwitch {
 			txtEdit.setSelection(start+4);
 			break;
 		   
-		case R.id.Button_tan: 
+		case 303: 
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
@@ -193,14 +253,21 @@ public class onClickSwitch {
 			txtEdit.setSelection(start+4);
 			break;
 		   
-		case R.id.Button_pi: 
+		case 304: 
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
 					"Pi", 0, 2);				   
 			break;
+			
+		case 305: 
+			start = Math.max(txtEdit.getSelectionStart(), 0);
+			end = Math.max(txtEdit.getSelectionEnd(), 0);
+			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+					"x", 0, 1);				   
+			break;
 		   
-		case R.id.Button_asin: 
+		case 306: 
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
@@ -209,7 +276,7 @@ public class onClickSwitch {
 		   	break;
 		   
 		   
-		case R.id.Button_acos: 
+		case 307: 
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
@@ -217,156 +284,87 @@ public class onClickSwitch {
 			txtEdit.setSelection(start+7);
 			break;
 		   
-		case R.id.Button_atan: 
+		case 308: 
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
 					"ArcTan()", 0, 8);
 			txtEdit.setSelection(start+7);
 			break;
-     
-		case R.id.Button_squared: 
-            start = Math.max(txtEdit.getSelectionStart(), 0);
-            end = Math.max(txtEdit.getSelectionEnd(), 0);
-            txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-                    "()^2", 0, 4);
-            txtEdit.setSelection(start+1);
-            break;
-
-		case R.id.Button_sqrt: 
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"sqrt()", 0, 6);
-			txtEdit.setSelection(start+5);
-			break;
-
-		case R.id.Button_power: 
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"()^()", 0, 5);
-			txtEdit.setSelection(start+1);
-			break;
-
-		case R.id.Button_root: 
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"()^(1/)", 0, 6);
-			txtEdit.setSelection(start+1);
-			break;
-
-		case R.id.Button_inv: 
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"1/()", 0, 5);
-		 	txtEdit.setSelection(start+3);
-		 	break;
-
-		case R.id.Button_integr: 
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"integrate()", 0, 11);
-  		 	txtEdit.setSelection(start+10);
-  		 	break;		
-
-		case R.id.Button_ln: 
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"ln()", 0, 4);
-			txtEdit.setSelection(start+3);
-			break;
-
-		case R.id.Button_log: 
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"log()", 0, 5);
-			txtEdit.setSelection(start+4);
-			break;
-
-		case R.id.Button_abs: 
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"abs()", 0, 5);
-			txtEdit.setSelection(start+4);
-			break;
 			
-		case R.id.Button_equalsrest: 
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"=", 0, 1);
-			break;
-		   
-		case R.id.Button_greater: 
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					">", 0, 1);
-			break;
-		   
-		case R.id.Button_smaller: 
+		case 401: 
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
 					"<", 0, 1);
 			break;
-		   
-		case R.id.Button_constants: 
+			
+		case 402: 
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"WTFF", 0, 4);
+					">", 0, 1);
 			break;
-		   	
-		case R.id.Button_unequal: 
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"!=", 0, 2);
-			break;
-		   
-		case R.id.Button_greaterequal: 
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					">=", 0, 2);
-			break;
-		   
-		case R.id.Button_smallerequal: 
+			
+		case 403: 
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
 					"<=", 0, 2);
 			break;	
-		   
-		case R.id.Button_factorial: 
+			
+		case 404: 
+			start = Math.max(txtEdit.getSelectionStart(), 0);
+			end = Math.max(txtEdit.getSelectionEnd(), 0);
+			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+					">=", 0, 2);
+			break;
+			
+		case 405: 
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
 					"!", 0, 1);
 			break;
-		   
-		case R.id.Button_ncr: 
+			
+		case 406: 
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-		           "NcR", 0, 3);
+		           "NcR(,)", 0, 6);
+			txtEdit.setSelection(start+4);
 		  	break;
 		   
-		case R.id.Button_npr: 
+		case 407: 
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"NpR", 0, 3);
+					"NpR(,)", 0, 6);
+			txtEdit.setSelection(start+4);
 			break;
-		}			
+		   
+		case 408: 
+			start = Math.max(txtEdit.getSelectionStart(), 0);
+			end = Math.max(txtEdit.getSelectionEnd(), 0);
+			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+					"WTFF", 0, 4);
+			break;		
+		
+		case 901: 
+			start = Math.max(txtEdit.getSelectionStart(), 0);
+			end = Math.max(txtEdit.getSelectionEnd(), 0);
+			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+					"Diff[]", 0, 6);
+			txtEdit.setSelection(start+5);
+			break;	 
+		case 902: 
+			start = Math.max(txtEdit.getSelectionStart(), 0);
+			end = Math.max(txtEdit.getSelectionEnd(), 0);
+			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+					"Integrate[]", 0, 11);
+			txtEdit.setSelection(start+10);
+			break;	
+		}
 		return txtEdit;
 	}
 }

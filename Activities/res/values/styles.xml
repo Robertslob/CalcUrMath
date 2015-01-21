@@ -22,7 +22,7 @@
 		<item name="android:layout_height">0dp</item>
 		<item name="android:layout_weight">10</item>
 		<item name="android:text">@string/emptytext</item>
-		<item name="android:textSize">20sp</item>
+		<item name="android:textSize">30sp</item>
     </style>
     
     <style name="AnsView.Out">

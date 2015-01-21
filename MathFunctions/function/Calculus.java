@@ -12,14 +12,16 @@ public class Calculus
 	// The string must be written with lowerCases
 	public static String lowerCase(String s)
 	{
-		EvalUtilities util = new EvalUtilities(false, true);
-		return util.evaluate(s).toString();
+		// The replaces optimize the string from the input and for the output
+		EvalUtilities util = new EvalUtilities(false, true);		
+		return optimizeAnswer(util.evaluate(optimizeInput(s)).toString());
 	}
 	
 	public static String doubleLowerCase(String s)
 	{
+		// The replaces optimize the string from the input and for the output
 		EvalDouble doubleUtil = new EvalDouble(true);
-		return String.valueOf(doubleUtil.evaluate(s));		
+		return optimizeAnswer(String.valueOf(doubleUtil.evaluate(optimizeInput(s))));
 	}
 	// Get the value of an function s like "Sin(x)" for x=b
 	// If the boolean is true, the answer is exact, otherwise its an approximation
@@ -52,5 +54,24 @@ public class Calculus
 		if(c)
 			return lowerCase(result);
 		else return doubleLowerCase(result);
+	}
+	
+	// optimize the input for the evalEngine
+	public static String optimizeInput(String s){
+		if(s.contains("NcR(") | s.contains("NpR(") | s.contains("!"))
+			// stuur naar probabilityfunctions			
+		s = s.replace('i', 'I');
+		s = s.replace("[","(");
+		s = s.replace("]",",x)");
+		return s;
+	}
+	
+	// optimize the answer/output for the ansViewer
+	public static String optimizeAnswer(String s){
+		s = s.replace("sec", "1/cos");
+		s = s.replace("csc", "1/sin");
+		s = s.replace("cot", "1/tan");
+		s = s.replace('I', 'i');
+		return s;
 	}
 }
