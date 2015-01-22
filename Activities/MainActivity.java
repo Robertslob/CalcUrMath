@@ -193,6 +193,22 @@ public class MainActivity extends ActionBarActivity{
 		ansViews[21]  = (TextView) findViewById(R.id.ansView22);
 		ansViews[22] = (TextView) findViewById(R.id.ansView23);
 		ansViews[23] = (TextView) findViewById(R.id.ansView24);
+		
+		// Set the onclicklistener for the ansViews
+		for(int i = 0; i<24; i++)
+		{
+			ansViews[i].setOnClickListener(new OnClickListener(){
+				@Override
+	            public void onClick(View v) {					
+					// If an ansView is pressed, insert that string in the txtEdit
+					String s = ((TextView)v).getText().toString();
+					int start = Math.max(txtEdit.getSelectionStart(), 0);
+					int end = Math.max(txtEdit.getSelectionEnd(), 0);
+					txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+							s, 0, s.length());
+	            }
+			});
+		}
 	}
 	
 	@Override

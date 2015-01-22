@@ -3,6 +3,8 @@ package com.teamindecisive.calcurmath.function;
 import org.matheclipse.core.eval.EvalDouble;
 import org.matheclipse.core.eval.EvalUtilities;
 
+import com.teamindecisive.calcurmath.symbolic.ProbabilityFunctions;
+
 // A string like the following should be given with "diff(sin(x)*cos(x),x)" or "integrate(sin(x)^5,x)"
 // Other expressions can be given aswell, like "1/2+1/3" which returns "5/6"
 // There will be a string returned like "-Sin(x)^2+Cos(x)^2" (note the capitals)
@@ -58,8 +60,11 @@ public class Calculus
 	
 	// optimize the input for the evalEngine
 	public static String optimizeInput(String s){
-		if(s.contains("NcR(") | s.contains("NpR(") | s.contains("!"))
-			// stuur naar probabilityfunctions			
+		// Calculate NcR/NpR statements first
+		if(s.contains("NcR["))
+			s = getProbValue(s, "NcR[");
+		if(s.contains("NpR["))
+			s = getProbValue(s, "NpR[");		
 		s = s.replace('i', 'I');
 		s = s.replace("[","(");
 		s = s.replace("]",",x)");
@@ -73,5 +78,46 @@ public class Calculus
 		s = s.replace("cot", "1/tan");
 		s = s.replace('I', 'i');
 		return s;
+	}
+	
+	// Calculate the value of the NcR/NpR and return the string with this value calculated
+	public static String getProbValue(String s, String Case){
+		int count = 1;
+		int firstCount = s.indexOf(Case);
+		int lastCount = 0;
+		// We take the cases with more than multiple [ and ] in consideration
+		// That way we can still solve an input like "NcR[Diff[7x],3]"
+		for(int i = s.indexOf(Case)+4; ; i++){			
+			if (s.charAt(i) == '[')
+				count++;
+			if (s.charAt(i) == ']')
+				count--;			
+			lastCount = i+1;
+			if(count == 0)
+				break;
+		}
+		
+		// The NcR/Npr statement which should be replaced 
+		String replaceString = s.substring(firstCount, lastCount);
+		// The first part, between the [ and the ','
+		String firstChild = Calculus.lowerCase(replaceString.substring
+				(4,replaceString.indexOf(",")));
+		// The last part, between the , and the last ]
+		String lastChild = Calculus.lowerCase(replaceString.substring(
+				replaceString.indexOf(",")+1, replaceString.length()-1));
+		String probValueCalculated;
+		// Calculate the NcR/NpR value and put it in the string probValueCalculated
+		if(Case == "NcR[")
+			probValueCalculated = String.valueOf(ProbabilityFunctions.combinations(Integer.parseInt(firstChild), 
+				Integer.parseInt(lastChild)));				
+		else probValueCalculated = String.valueOf(ProbabilityFunctions.permutations(Integer.parseInt(firstChild),
+				Integer.parseInt(lastChild)));		
+		// Swap the calculated value with the NcR/NpR statement
+		String preFinal =  s.replace(replaceString, probValueCalculated);
+		
+		// In case there are multiple NcR/NpR statements in the string
+		if(preFinal.contains(Case))
+			preFinal = getProbValue(preFinal, Case);
+		return preFinal;
 	}
 }

@@ -331,7 +331,7 @@ public class onClickSwitch {
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-		           "NcR(,)", 0, 6);
+		           "NcR[,]", 0, 6);
 			txtEdit.setSelection(start+4);
 		  	break;
 		   
@@ -339,7 +339,7 @@ public class onClickSwitch {
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"NpR(,)", 0, 6);
+					"NpR[,]", 0, 6);
 			txtEdit.setSelection(start+4);
 			break;
 		   
