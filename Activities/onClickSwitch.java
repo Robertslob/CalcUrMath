@@ -5,6 +5,7 @@ import android.widget.EditText;
 public class onClickSwitch {
 	
 	public static EditText txtSwitch(EditText txtEdit, int primaryCode){
+		// Start and end of selection
 		int start;
 		int end;
 		switch(primaryCode) {
@@ -193,7 +194,7 @@ public class onClickSwitch {
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"()^(1/)", 0, 6);
+					"()^(1/)", 0, 7);
 			txtEdit.setSelection(start+1);
 			break;
 
@@ -225,7 +226,7 @@ public class onClickSwitch {
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"ln()", 0, 4);
+					"e^()", 0, 4);
 			txtEdit.setSelection(start+3);
 			break;		
 			
@@ -257,7 +258,7 @@ public class onClickSwitch {
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"Pi", 0, 2);				   
+					"Pi", 0, 1);				   
 			break;
 			
 		case 305: 
@@ -341,14 +342,7 @@ public class onClickSwitch {
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
 					"NpR[,]", 0, 6);
 			txtEdit.setSelection(start+4);
-			break;
-		   
-		case 408: 
-			start = Math.max(txtEdit.getSelectionStart(), 0);
-			end = Math.max(txtEdit.getSelectionEnd(), 0);
-			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"WTFF", 0, 4);
-			break;		
+			break;	
 		
 		case 901: 
 			start = Math.max(txtEdit.getSelectionStart(), 0);
@@ -365,6 +359,7 @@ public class onClickSwitch {
 			txtEdit.setSelection(start+10);
 			break;	
 		}
+		// We adjust the text of the txtEdit, and return the adjusted txtEdit
 		return txtEdit;
 	}
 }

@@ -17,7 +17,7 @@
         <Key android:codes="205"    android:keyLabel="1/x" android:horizontalGap="1%p"/>
         <Key android:codes="206"    android:keyLabel="|x|" android:horizontalGap="1%p"/>
         <Key android:codes="207"    android:keyLabel="log(..)" android:horizontalGap="1%p"/>
-        <Key android:codes="208"    android:keyLabel="ln(..)" android:horizontalGap="1%p"/>
+        <Key android:codes="208"    android:keyLabel="eⁿ" android:horizontalGap="1%p"/>
         <Key android:codes="902"    android:keyLabel="∫(..)dx" android:horizontalGap="1%p" android:keyEdgeFlags="right"/>        
     </Row>
     

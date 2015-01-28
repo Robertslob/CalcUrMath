@@ -12,10 +12,10 @@ import android.widget.LinearLayout;*/
 
 package com.teamindecisive.calcurmath;
 
-import org.matheclipse.core.expression.F;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.inputmethodservice.Keyboard;
@@ -24,6 +24,8 @@ import android.inputmethodservice.KeyboardView.OnKeyboardActionListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.InputType;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -52,13 +54,10 @@ public class MainActivity extends ActionBarActivity{
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.activity_main);	
 		ansViews = new TextView[24];
-		txtEdit = (EditText)findViewById(R.id.TextInput);
-		// Set the buttons
-		equals = (Button) findViewById(R.id.Button_equals);
-		approximate = (Button) findViewById(R.id.Button_approximate);
+		txtEdit = (EditText)findViewById(R.id.TextInput);	
         
-        // Set the listeners for the equals and approximate button
-        setButtonListeners();
+        // Assign and set the listeners for the equals and approximate button
+        setCalculateButtons();
         
 		//txtEdit.setRawInputType(InputType.TYPE_CLASS_TEXT);
         //txtEdit.setTextIsSelectable(true);	
@@ -91,6 +90,7 @@ public class MainActivity extends ActionBarActivity{
             }
         });
         
+        // Don't let the basic keyboard pop up on start-up
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         // Do not show the preview balloons
@@ -100,11 +100,13 @@ public class MainActivity extends ActionBarActivity{
         loadEvalEngine();
 		}
 	
+	// Do two calculation to load the evalengine
 	protected void loadEvalEngine(){
 		Calculus.lowerCase("Integrate(x,x)");
 		Calculus.lowerCase("Diff(x,x)");
 	}
 	
+	// If something on the keyboard is pressed, this handles the result action
 	protected OnKeyboardActionListener onKeyboardActionListener = new OnKeyboardActionListener() {
         @Override public void onKey(int primaryCode, int[] keyCodes) 
         {             
@@ -120,17 +122,15 @@ public class MainActivity extends ActionBarActivity{
 	             	break;
 	             case 10005: showAbout(); 
 	             	break;
+	             case 408: goToConstants();
+	             	break;
 	             case 100: 
 	            	int start = Math.max(txtEdit.getSelectionStart(), 0);
 	    			int end = Math.max(txtEdit.getSelectionEnd(), 0);
 	    			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
 	    					ansViews[0].getText().toString(), 0, ansViews[0].getText().length());
 	    			break;
-	             /*case 901: diff(); 
-	             	break;
-	             case 902: integrate(); 
-	             	break;*/
-	             	// The rest of the cases can be handled with the onClickSwitch class
+	    			// In the default case, the onclickswitch class can handle it
 	             default: txtEdit = onClickSwitch.txtSwitch(txtEdit, primaryCode); 
 	             	break;        
              }
@@ -162,12 +162,13 @@ public class MainActivity extends ActionBarActivity{
         	else if(keyboardView.getKeyboard().equals(restKeyboard))
         		keyboardView.setKeyboard(functionKeyboard);        	
         }
-
+        
         @Override public void swipeUp() {
         	keyboardView.setKeyboard(restKeyboard);
         }
     };
 	
+    // set the AnsViews
 	protected void setAnsViews(){
 		ansViews[0]  = (TextView) findViewById(R.id.ansView1);
 		ansViews[1]  = (TextView) findViewById(R.id.ansView2);
@@ -213,16 +214,12 @@ public class MainActivity extends ActionBarActivity{
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_graph) {
 			goToGraph();
@@ -231,12 +228,14 @@ public class MainActivity extends ActionBarActivity{
 		return super.onOptionsItemSelected(item);
 	}
 	
+	// Open when the about button is pressed
 	public void showAbout(){
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage("Made by Robert, Joris, Daan and Willem.")
 		       .setTitle("About")
 		       .setPositiveButton("Go to our site", new DialogInterface.OnClickListener() {
 		    	   public void onClick(DialogInterface dialog, int id) {
+		    		   // Open the browser and go to our site
 		    		   Intent browserIntent = 
 		               new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.projects.science.uu.nl/INFOB1PICA/2014/6a/index.html"));		    		   
 		    		   startActivity(browserIntent);
@@ -244,65 +243,119 @@ public class MainActivity extends ActionBarActivity{
 		       })
 		       .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 		    	   public void onClick(DialogInterface dialog, int id) {
-		               //dialog verdwijnt automatisch als je een knop indrukt dus dit is leeg
+		               // Dialog closes automatically when button is pressed
 		           }
 		       });
 		builder.show();		 
 	}
-	/*
-	public void diff(){
+	
+	// If the constants button is pressed, create and alertdialog with the constants layout as view
+	@SuppressLint("InflateParams") protected void goToConstants(){		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		final EditText input = new EditText(this);
-		builder.setMessage("Enter the function you would like to differentiate below.")
-			   .setTitle("Differentiation")
+		LayoutInflater inflater = getLayoutInflater();
+		// Create the view from the layout
+		View v = inflater.inflate(R.layout.constants, null);
+		builder.setMessage("Choose a constant below")
+			   .setTitle("Constants")
+			   .setView(v)
+			   .setPositiveButton("Done", new DialogInterface.OnClickListener() {
+				   public void onClick(DialogInterface dialog, int id) {
+					   dialog.cancel();
+		           }});		
+		builder.show();
+		setConstantButtons(v);
+	}
+	
+	// Set all the buttons from the constants
+	protected void setConstantButtons(View layout){
+		Button[] constants = new Button[24];
+		// We use layout.findViewById to make sure the buttons arent null, since the layout isn't initialised yet
+		constants[0] = (Button) layout.findViewById(R.id.tableButtonA);
+		constants[1] = (Button) layout.findViewById(R.id.tableButtonB);
+		constants[2] = (Button) layout.findViewById(R.id.tableButtonC);
+		constants[3] = (Button) layout.findViewById(R.id.tableButtonD);
+		constants[4] = (Button) layout.findViewById(R.id.tableButtonF);
+		constants[5] = (Button) layout.findViewById(R.id.tableButtonG);
+		constants[6] = (Button) layout.findViewById(R.id.tableButtonH);
+		constants[7] = (Button) layout.findViewById(R.id.tableButtonJ);
+		constants[8] = (Button) layout.findViewById(R.id.tableButtonK);
+		constants[9] = (Button) layout.findViewById(R.id.tableButtonL);
+		constants[10] = (Button) layout.findViewById(R.id.tableButtonM);
+		constants[11] = (Button) layout.findViewById(R.id.tableButtonN);
+		constants[12] = (Button) layout.findViewById(R.id.tableButtonO);
+		constants[13] = (Button) layout.findViewById(R.id.tableButtonP);
+		constants[14] = (Button) layout.findViewById(R.id.tableButtonQ);
+		constants[15] = (Button) layout.findViewById(R.id.tableButtonR);
+		constants[16] = (Button) layout.findViewById(R.id.tableButtonS);
+		constants[17] = (Button) layout.findViewById(R.id.tableButtonT);
+		constants[18] = (Button) layout.findViewById(R.id.tableButtonU);
+		constants[19] = (Button) layout.findViewById(R.id.tableButtonV);
+		constants[20] = (Button) layout.findViewById(R.id.tableButtonW);
+		constants[21] = (Button) layout.findViewById(R.id.tableButtonY);
+		constants[22] = (Button) layout.findViewById(R.id.tableButtonZ);
+			
+		for(int i = 0; i<23; i++){
+			constants[i].setOnClickListener(new OnClickListener(){
+				public void onClick(View v){
+					// Let a builder be created if a button is pressed
+					constantPressedBuilder(v);
+				}
+			});
+		}
+	}
+	
+	protected void constantPressedBuilder(View v){
+		// The character of the button
+		final String buttonText = ((Button)v).getText().toString();
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);	
+		// The EditText, set color Black and make both decimal and negative values possible
+		final EditText input = new EditText(getBaseContext());
+		input.setTextColor(getResources().getColor(R.color.black));
+		input.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL|InputType.TYPE_NUMBER_FLAG_SIGNED);
+		// Create the builder
+		builder.setMessage("Give this constant a value or insert it")
+			   .setTitle("Constant " + buttonText)
 			   .setView(input)
-			   .setPositiveButton("Diffentiate!", new DialogInterface.OnClickListener() {
+			   .setPositiveButton("Assign value", new DialogInterface.OnClickListener() {
 				   public void onClick(DialogInterface dialog, int id) {
+					   // Assign the value of the string to the constant in Calculus
 					   String inputString = input.getText().toString();
-					   moveAnsText();
-					   ansViews[0].setText(inputString);
-					   ansViews[1].setText(Calculus.lowerCase("diff(" + inputString + ", x)"));
+					   Calculus.lowerCase(buttonText + "=" + inputString);
 		           }})
-			   .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			   .setNegativeButton("Insert", new DialogInterface.OnClickListener() {
 				   public void onClick(DialogInterface dialog, int id) {
-					   dialog.cancel();				
+					   // Put the variable in the txtEdit
+					   int start = Math.max(txtEdit.getSelectionStart(), 0);
+					   int end = Math.max(txtEdit.getSelectionEnd(), 0);
+					   txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
+							   buttonText, 0, 1);
+					   // Dialog closes automatically if button is pressed
 				   }});
 		builder.show();
 	}
 	
-	public void integrate(){
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		final EditText input = new EditText(this);
-		builder.setMessage("Enter the function you would like to integrate below.")
-			   .setTitle("Integration")
-			   .setView(input)
-			   .setPositiveButton("Integrate!", new DialogInterface.OnClickListener() {
-				   public void onClick(DialogInterface dialog, int id) {
-					   String inputString = input.getText().toString();
-					   moveAnsText();
-					   ansViews[0].setText(inputString);
-					   ansViews[1].setText(Calculus.lowerCase("Integrate(" + inputString + ", x)"));
-		           }})
-			   .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-				   public void onClick(DialogInterface dialog, int id) {
-					   dialog.cancel();				
-				   }});
-		builder.show();
-	}*/
-	
-	protected void setButtonListeners(){
+	// Assign and Set the listeners for the equals and approximate button
+	protected void setCalculateButtons(){
+		equals = (Button) findViewById(R.id.Button_equals);
+		approximate = (Button) findViewById(R.id.Button_approximate);
 		
 		equals.setOnClickListener(new OnClickListener(){
 			public void onClick(View v){
 				if(!txtEdit.getText().toString().isEmpty()){
-					try{						
+					try{
+						// Move the ansTexts, then set the input in the most above ansView
+						// In the ansVIew beneath that, put the calculated value
 						moveAnsText();
 						ansViews[0].setText(txtEdit.getText().toString());
 						ansViews[1].setText(Calculus.lowerCase(txtEdit.getText().toString()));													
 					}
 					catch(Exception e){
+						// May there be an exception, insert Error where the value should be and open an alertdialog
+						showError(e);
 						ansViews[1].setText("Error");
 					}
+					// Clear the txtEdit for a new calculation
 					txtEdit.getText().clear();
 				}
 			}						
@@ -311,51 +364,57 @@ public class MainActivity extends ActionBarActivity{
 		approximate.setOnClickListener(new OnClickListener(){
 			public void onClick(View v){
 				if(!txtEdit.getText().toString().isEmpty()){
-					try{					
+					try{
+						// Move the ansTexts, then set the input in the most above ansView
+						// In the ansVIew beneath that, put the calculated double 
 						moveAnsText();
 						ansViews[0].setText(txtEdit.getText().toString());
 						ansViews[1].setText(Calculus.doubleLowerCase(txtEdit.getText().toString()));							
 					}
 					catch(Exception e){
+						// May there be an exception, insert Error where the value should be and open an alertdialog
+						showError(e);
 						ansViews[1].setText("Error");	
 					}
+					// Clear the txtEdit for a new calculation
 					txtEdit.getText().clear();
 				}
 			}			
 		});
 	}
 	
-	protected String optimizeInput(String s){
-		s = s.replace('i', 'I');
-		s = s.replace("[","(");
-		s = s.replace("]",",x)");
-		return s;
+	protected void showError(Exception e){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("We can't calculate that. " + e)
+		       .setTitle("Error in calculation")
+		       .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+		    	   public void onClick(DialogInterface dialog, int id) {
+		    		   // Closes automatically when a button is pressed
+		           }
+		       });
+		builder.show();	
 	}
 	
-	protected String optimizeAnswer(String s){
-		s = s.replace("sec", "1/cos");
-		s = s.replace("csc", "1/sin");
-		s = s.replace("cot", "1/tan");
-		s = s.replace('I', 'i');
-		return s;
-	}
-	
+	// Let the input of the ansViews go down
 	protected void moveAnsText(){
 		for(int i=23; i>1; i--)
 			ansViews[i].setText(ansViews[i-2].getText().toString());
 	}
 	
+	// Start the graphActivity
 	public void goToGraph()
 	{
 		Intent i = new Intent(this, GraphActivity.class);
 		startActivity(i);
 	}
 	
+	// Hide the keyboard
 	public void hideKeyboard(View v){
     	keyboardView.setVisibility(View.GONE);
         keyboardView.setEnabled(false);
     }
     
+	// SHow the keyboard
     public void showKeyboard(View v){
        keyboardView.setVisibility(View.VISIBLE);
        keyboardView.setEnabled(true);

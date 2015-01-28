@@ -263,7 +263,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/toGraph"
-                        android:textSize="35sp" />
+                        android:textSize="35sp"
+                        android:textAllCaps="false" />
                     
                     <Button
                         android:id="@+id/resetButton"
@@ -271,8 +272,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/reset"
-                        android:textSize="35sp" />
-
+                        android:textSize="35sp" 
+                        android:textAllCaps="false" />
                 </LinearLayout>
 
             </LinearLayout>

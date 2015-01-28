@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <TableRow
+        style="@style/ConstantsRow" >
+        <Button 
+            android:id="@+id/tableButtonA" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonA"
+            android:textSize="25sp"/>
+        <Button 
+            android:id="@+id/tableButtonB" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/ButtonB"
+            android:textSize="25sp"/>
+        <Button 
+            android:id="@+id/tableButtonC" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonC"
+            android:textSize="25sp"/>        
+    </TableRow>
+    
+    <TableRow 
+        style="@style/ConstantsRow" >
+        <Button 
+            android:id="@+id/tableButtonD" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonD"
+            android:textSize="25sp"/>
+        <Button             
+            android:id="@+id/tableButtonF" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonF"
+            android:textSize="25sp"/>
+        <Button 
+            android:id="@+id/tableButtonG" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonG"
+            android:textSize="25sp"/>
+        <Button 
+            android:id="@+id/tableButtonH" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonH"
+            android:textSize="25sp"/>
+    </TableRow>
+    
+    <TableRow 
+        style="@style/ConstantsRow" >
+        <Button 
+            android:id="@+id/tableButtonJ" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonJ"
+            android:textSize="25sp"/>
+        <Button 
+            android:id="@+id/tableButtonK" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonK"
+            android:textSize="25sp"/>
+        <Button 
+            android:id="@+id/tableButtonL" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonL"
+            android:textSize="25sp"/>
+        <Button 
+            android:id="@+id/tableButtonM" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonM"
+            android:textSize="25sp"/>
+    </TableRow>
+    
+    <TableRow 
+        style="@style/ConstantsRow" >
+        <Button 
+            android:id="@+id/tableButtonN" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonN"
+            android:textSize="25sp"/>
+        <Button 
+            android:id="@+id/tableButtonO" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonO"
+            android:textSize="25sp"/>
+        <Button 
+            android:id="@+id/tableButtonP" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonP"
+            android:textSize="25sp"/>
+        <Button 
+            android:id="@+id/tableButtonQ" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonQ"
+            android:textSize="25sp"/>
+    </TableRow>
+    
+    <TableRow 
+        style="@style/ConstantsRow" >
+        <Button 
+            android:id="@+id/tableButtonR" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonR"
+            android:textSize="25sp"/>
+        <Button 
+            android:id="@+id/tableButtonS" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonS"
+            android:textSize="25sp"/>
+        <Button 
+            android:id="@+id/tableButtonT" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonT"
+            android:textSize="25sp"/>
+        <Button 
+            android:id="@+id/tableButtonU" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonU"
+            android:textSize="25sp"/>
+    </TableRow>
+    
+    <TableRow 
+        style="@style/ConstantsRow" >
+        <Button 
+            android:id="@+id/tableButtonV" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonV"
+            android:textSize="25sp"/>
+        <Button 
+            android:id="@+id/tableButtonW" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonW"
+            android:textSize="25sp"/>
+        <Button 
+            android:id="@+id/tableButtonY" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonY"
+            android:textSize="25sp"/>
+        <Button 
+            android:id="@+id/tableButtonZ" 
+           	style="@style/ConstantsButton" 
+            android:layout_weight="1"
+            android:text="@string/ButtonZ"
+            android:textSize="25sp"/>
+    </TableRow>
+
+</TableLayout>

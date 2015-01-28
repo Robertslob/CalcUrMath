@@ -36,9 +36,6 @@ public class GraphActivity extends ActionBarActivity
 	protected void setButtons(){
 		Button btnGraph = (Button) findViewById(R.id.graphButton);
 		Button btnReset = (Button) findViewById(R.id.resetButton);
-		// let the text of the buttons not be all-caps
-		btnGraph.setTransformationMethod(null);
-		btnReset.setTransformationMethod(null);
 		// Set the onClickListeners
 		btnGraph.setOnClickListener(new View.OnClickListener(){
 			@Override
@@ -71,6 +68,7 @@ public class GraphActivity extends ActionBarActivity
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) 
 	{
+		// If Calculator is selected in options menu, go to the calculator activity
 		if(item.getItemId() == R.id.action_calculator){
 			goToCalculator();
 			return true;
@@ -79,6 +77,7 @@ public class GraphActivity extends ActionBarActivity
 	}
 	
 	protected void getAxesFromText(){
+		// Get the text from the editTexts and assign this text to their values
 		EditText xMinEdit = (EditText) findViewById(R.id.xMin_Edit);
 		EditText xMaxEdit = (EditText) findViewById(R.id.xMax_Edit);
 		EditText yMinEdit = (EditText) findViewById(R.id.yMin_Edit);
@@ -103,12 +102,14 @@ public class GraphActivity extends ActionBarActivity
 					   public void onClick(DialogInterface dialog, int id) {
 						   dialog.cancel();
 			           }});
+			// If we don't use parseError, the graph would still be drawn
 			parseError = true;
 			builder.show();
 		}		
 	}
 	
 	protected void getFunctionsFromText(){
+		// Get the text from the editTexts and assign this text to their values
 		EditText [] editFunctions = new EditText[6];
 		editFunctions[0] = (EditText) findViewById(R.id.F1_Edit);
 		editFunctions[1] = (EditText) findViewById(R.id.F2_Edit);
@@ -116,7 +117,7 @@ public class GraphActivity extends ActionBarActivity
 		editFunctions[3] = (EditText) findViewById(R.id.F4_Edit);
 		editFunctions[4] = (EditText) findViewById(R.id.F5_Edit);
 		editFunctions[5] = (EditText) findViewById(R.id.F6_Edit);
-		for(int i=0; i<6; i++)
+		for(int i=0; i<6; i++){
 			if(!editFunctions[i].getText().toString().isEmpty()){ //(editFunctions[i].getText().toString().matches("") | editFunctions[i].getText().toString() == null))
 				try{
 					String s = editFunctions[i].getText().toString();
@@ -134,11 +135,13 @@ public class GraphActivity extends ActionBarActivity
 							   public void onClick(DialogInterface dialog, int id) {
 								   dialog.cancel();
 					           }});
+					// If we don't use parseError, the graph would still be drawn
 					parseError = true;
 					builder.show();								
 				}
 			}
-				
+			else functions[i] = null;
+		}
 	}
 	
 	protected void drawGraph()
@@ -147,13 +150,15 @@ public class GraphActivity extends ActionBarActivity
         float[][] functionValues = new float[6][(int)(xMax-xMin)*100+1];
 	    for (int i=0;i<(int)(xMax-xMin)*100+1;i++)
 		{        	
-			double temp = (xMin+i*.01);	
+			// Calculate the y-value for all the functions dependent on the x-value
+	    	double temp = (xMin+i*.01);	
         	xvalues[i] = (float)temp;
         	String stringTemp = String.valueOf(temp);
         	for(int n = 0; n<6; n++)
-        		if(!(functions[n] =="" | functions[n]==null))
+        		if(!(functions[n] =="" | functions[n]==null))        			
         			functionValues[n][i] = (float)Double.parseDouble(Calculus.getValue(functions[n], stringTemp, false));       
 		}
+	    // Show the graph in a builder
 	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Your graph")
 			   .setPositiveButton("Back to settings", new DialogInterface.OnClickListener() {

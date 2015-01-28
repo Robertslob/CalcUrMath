@@ -27,7 +27,7 @@ public class GraphView extends View
 		maxy = (float)yMax;
 		paint = new Paint();
 
-		getAxes(xValues);//, functionValues);		
+		getAxes(xValues);
 	}
 
 	@Override
@@ -143,25 +143,4 @@ public class GraphView extends View
 		pint = (int)p;
 		return (pint);
 	}
-	
-	/*
-	private float getMax(float[][] v) 
-	{
-		float largest = v[0][0];
-		for(int i=0; i<6; i++)
-			for (int n = 0; n < v[i].length; n++)
-				if (v[i][n] > largest)
-					largest = v[i][n];
-		return 10;
-	}
-
-	private float getMin(float[][] v) 
-	{
-		float smallest = v[0][0];
-		for(int i=0; i<6; i++)
-			for (int n = 0; n < v[i].length; n++)
-				if (v[i][n] < smallest)
-					smallest = v[i][n];
-		return -10;
-	}*/
 }

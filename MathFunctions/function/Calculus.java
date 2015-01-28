@@ -15,7 +15,7 @@ public class Calculus
 	public static String lowerCase(String s)
 	{
 		// The replaces optimize the string from the input and for the output
-		EvalUtilities util = new EvalUtilities(false, true);		
+		EvalUtilities util = new EvalUtilities(false, true);	
 		return optimizeAnswer(util.evaluate(optimizeInput(s)).toString());
 	}
 	
@@ -64,7 +64,7 @@ public class Calculus
 		if(s.contains("NcR["))
 			s = getProbValue(s, "NcR[");
 		if(s.contains("NpR["))
-			s = getProbValue(s, "NpR[");		
+			s = getProbValue(s, "NpR[");
 		s = s.replace('i', 'I');
 		s = s.replace("[","(");
 		s = s.replace("]",",x)");
@@ -73,9 +73,9 @@ public class Calculus
 	
 	// optimize the answer/output for the ansViewer
 	public static String optimizeAnswer(String s){
-		s = s.replace("sec", "1/cos");
-		s = s.replace("csc", "1/sin");
-		s = s.replace("cot", "1/tan");
+		s = s.replace("Sec", "1/Cos");
+		s = s.replace("Csc", "1/Sin");
+		s = s.replace("Cot", "1/Tan");
 		s = s.replace('I', 'i');
 		return s;
 	}
