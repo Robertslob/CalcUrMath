@@ -210,7 +210,7 @@ public class onClickSwitch {
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"||", 0, 5);
+					"||", 0, 2);
 			txtEdit.setSelection(start+1);
 			break;
 			
@@ -258,7 +258,7 @@ public class onClickSwitch {
 			start = Math.max(txtEdit.getSelectionStart(), 0);
 			end = Math.max(txtEdit.getSelectionEnd(), 0);
 			txtEdit.getText().replace(Math.min(start, end), Math.max(start, end),
-					"Pi", 0, 1);				   
+					"Pi", 0, 2);				   
 			break;
 			
 		case 305: 
